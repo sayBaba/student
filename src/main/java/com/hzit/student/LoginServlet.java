@@ -7,24 +7,29 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
  * 登录控制器
  */
-@WebServlet(name = "login",urlPatterns = {"/login"})
+@WebServlet(name = "login",urlPatterns = {"/login.do"})
 public class LoginServlet extends HttpServlet {
 
 
     //json
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        resp.setContentType("text/html charset=utf-8");
-        resp.setCharacterEncoding("UTF-8");
+//        req.setCharacterEncoding("utf-8");
+//
+//        resp.setContentType("text/html charset=utf-8");
+//        resp.setCharacterEncoding("UTF-8");
 
         String userName = req.getParameter("ope_name");
         //调用方法
+
+        //创建session
+       HttpSession session = req.getSession();
 
 
         String password = req.getParameter("ope_pwd");
@@ -79,6 +84,8 @@ public class LoginServlet extends HttpServlet {
 
         jsonObject.put("data",null);
 
+        session.setAttribute("isLogin","true");
+
         resp.getWriter().println(jsonObject);
 
 //        req.getRequestDispatcher("login.jsp").forward(req,resp);
@@ -96,6 +103,10 @@ public class LoginServlet extends HttpServlet {
 
         System.out.println(jsonObject);
 
+
+
+
+        System.out.println();
         //json 转 javaven
 
 //

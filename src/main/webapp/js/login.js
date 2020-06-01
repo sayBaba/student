@@ -9,7 +9,7 @@ function login() {
     $.ajax(
         {
             type:"get",   //提交方式
-            url:"/student_war/login?ope_name="+userName +"&ope_pwd="+password,  //提交的地址
+            url:"/student_war/login.do?ope_name="+userName +"&ope_pwd="+password,  //提交的地址
             // data:                      //请求数据
             dataType: "json", //后端返回的数据格式
             success:function(rs){    //请求发送成功，执行success rs后台返回的数据
@@ -17,6 +17,7 @@ function login() {
                     if(rs.code == 0){
                         //跳到登录页面
                         alert("登录成功");
+                        window.open("/Student/pages/index.jsp", "_self");
                     }else{
                         var errMsg = rs.msg;
                         $("#div1").html(errMsg);
